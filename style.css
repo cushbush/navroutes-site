@@ -55,6 +55,11 @@ h2{font-family:Manrope,sans-serif;font-size:41px;font-weight:600;line-height:1.2
 .scene-caption{font-size:12px;line-height:1.4}
 .app-disclosure{font-size:11px}
 @media(max-width:760px){.delivery-copy>p:not(.eyebrow){font-size:14px}.scene-caption{font-size:10px}.app-disclosure{font-size:10px}}
+.hero-footnote{font-size:12px;background:#ffffffb8;padding-block:19px}
+.hero-footnote>span:last-child{font-size:11px}
+@media(max-width:760px){.hero-footnote{font-size:10px;padding-block:14px}.hero-footnote>span:last-child{font-size:9px}}
+.app-illustrations figcaption .eyebrow{font-size:12px;letter-spacing:.02em}
+@media(max-width:760px){.app-illustrations figcaption .eyebrow{font-size:10px}}
 .hero-description{font-size:16px;line-height:1.85}
 .platforms{font-size:12px}
 .benefit-ribbon span{font-size:13px}
