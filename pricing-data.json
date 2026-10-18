@@ -1,0 +1,23 @@
+{
+  "effectiveDate": "2026-10-19",
+  "referenceTerritory": "United Kingdom",
+  "currency": "GBP",
+  "regionalPricing": "Apple App Store storefront pricing",
+  "plans": [
+    {
+      "id": "weekly",
+      "amount": 1.49,
+      "billingPeriod": "week"
+    },
+    {
+      "id": "monthly",
+      "amount": 3.00,
+      "billingPeriod": "month"
+    },
+    {
+      "id": "yearly",
+      "amount": 24.99,
+      "billingPeriod": "year"
+    }
+  ]
+}
