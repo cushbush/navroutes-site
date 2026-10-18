@@ -76,10 +76,25 @@ const selectorLabels = {
   ro: 'Limbă', sr: 'Језик', mk: 'Јазик',
   sk: 'Jazyk', sl: 'Jezik', sv: 'Språk', tr: 'Dil', uk: 'Мова'
 };
+const browserLanguageLabels = {
+  en: 'Browser language', pl: 'Język przeglądarki', de: 'Browsersprache',
+  fr: 'Langue du navigateur', it: 'Lingua del browser', hu: 'A böngésző nyelve',
+  cs: 'Jazyk prohlížeče', nb: 'Språk i nettleseren', da: 'Browserens sprog',
+  es: 'Idioma del navegador', nl: 'Browsertaal', pt: 'Idioma do navegador',
+  lt: 'Naršyklės kalba', sq: 'Gjuha e shfletuesit', be: 'Мова браўзера',
+  bs: 'Jezik preglednika', bg: 'Език на браузъра', hr: 'Jezik preglednika',
+  el: 'Γλώσσα προγράμματος περιήγησης', et: 'Brauseri keel',
+  fi: 'Selaimen kieli', is: 'Tungumál vafrans',
+  lv: 'Pārlūkprogrammas valoda', mt: 'Lingwa tal-brawżer',
+  ro: 'Limba browserului', sr: 'Језик прегледача',
+  mk: 'Јазик на прелистувачот', sk: 'Jazyk prehliadača',
+  sl: 'Jezik brskalnika', sv: 'Webbläsarens språk',
+  tr: 'Tarayıcı dili', uk: 'Мова браузера'
+};
+const pageLanguage = document.documentElement.lang.slice(0, 2);
 
 document.querySelectorAll('.language-switcher').forEach(switcher => {
   const select = document.createElement('select');
-  const pageLanguage = document.documentElement.lang.slice(0, 2);
   select.setAttribute('aria-label', selectorLabels[pageLanguage] || selectorLabels.en);
   languages.forEach(language => {
     const option = document.createElement('option');
@@ -96,6 +111,22 @@ document.querySelectorAll('.language-switcher').forEach(switcher => {
   });
   switcher.replaceChildren(select);
 });
+
+const browserLanguage = navigator.languages[0] || navigator.language;
+const browserLanguageCode = getLanguageCode(browserLanguage);
+const browserLanguageName = typeof Intl.DisplayNames === 'function'
+  ? new Intl.DisplayNames([document.documentElement.lang], { type: 'language' }).of(browserLanguage)
+  : null;
+const browserLanguageIndicator = document.createElement('p');
+browserLanguageIndicator.className = 'browser-language-indicator wrap';
+const browserLanguageLabel = document.createElement('span');
+browserLanguageLabel.textContent = `${browserLanguageLabels[pageLanguage] || browserLanguageLabels.en}:`;
+const browserLanguageValue = document.createElement('strong');
+browserLanguageValue.textContent = browserLanguageName
+  || languages.find(language => language.code === browserLanguageCode)?.label
+  || browserLanguage;
+browserLanguageIndicator.append(browserLanguageLabel, browserLanguageValue);
+document.querySelector('.site-header')?.before(browserLanguageIndicator);
 
 if (!isLocalizedPage && (currentPath === '/' || currentPath === '/index.html') && supportedLanguage && supportedLanguage !== 'en') {
   const language = languages.find(item => item.code === supportedLanguage);
@@ -327,7 +358,6 @@ const localizedStates = {
   }
 };
 
-const pageLanguage = document.documentElement.lang.slice(0, 2);
 const statesForLanguage = localizedStates[pageLanguage] || states;
 
 function renderIcons() {
