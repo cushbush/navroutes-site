@@ -1,23 +1,47 @@
 {
   "effectiveDate": "2026-10-19",
-  "referenceTerritory": "United Kingdom",
-  "currency": "GBP",
-  "regionalPricing": "Apple App Store storefront pricing",
-  "plans": [
-    {
-      "id": "weekly",
-      "amount": 1.49,
-      "billingPeriod": "week"
-    },
-    {
-      "id": "monthly",
-      "amount": 3.00,
-      "billingPeriod": "month"
-    },
-    {
-      "id": "yearly",
-      "amount": 24.99,
-      "billingPeriod": "year"
-    }
-  ]
+  "source": "App Store Connect scheduled storefront prices",
+  "markets": {
+    "en": {"name": "United Kingdom", "region": "GB", "currency": "GBP", "prices": {"weekly": 1.49, "monthly": 3.00, "yearly": 24.99}},
+    "be": {"name": "Belarus", "region": "BY", "currency": "USD", "prices": {"weekly": 1.99, "monthly": 4.00, "yearly": 29.99}},
+    "bg": {"name": "Bulgaria", "region": "BG", "currency": "EUR", "prices": {"weekly": 1.99, "monthly": 3.00, "yearly": 29.99}},
+    "bs": {"name": "Bosnia and Herzegovina", "region": "BA", "currency": "EUR", "prices": {"weekly": 1.99, "monthly": 3.00, "yearly": 29.99}},
+    "cs": {"name": "Czech Republic", "region": "CZ", "currency": "CZK", "prices": {"weekly": 49.00, "monthly": 79.00, "yearly": 699.00}},
+    "da": {"name": "Denmark", "region": "DK", "currency": "DKK", "prices": {"weekly": 19.00, "monthly": 29.00, "yearly": 199.00}},
+    "de": {"name": "Germany", "region": "DE", "currency": "EUR", "prices": {"weekly": 1.99, "monthly": 3.00, "yearly": 29.99}},
+    "de-at": {"name": "Austria", "region": "AT", "currency": "EUR", "prices": {"weekly": 1.99, "monthly": 3.00, "yearly": 29.99}},
+    "de-ch": {"name": "Switzerland", "region": "CH", "currency": "CHF", "prices": {"weekly": 2.00, "monthly": 3.00, "yearly": 20.00}},
+    "el": {"name": "Greece", "region": "GR", "currency": "EUR", "prices": {"weekly": 1.99, "monthly": 3.00, "yearly": 29.99}},
+    "el-cy": {"name": "Cyprus", "region": "CY", "currency": "EUR", "prices": {"weekly": 1.99, "monthly": 3.00, "yearly": 29.99}},
+    "en-ie": {"name": "Ireland", "region": "IE", "currency": "EUR", "prices": {"weekly": 1.99, "monthly": 3.00, "yearly": 29.99}},
+    "es": {"name": "Spain", "region": "ES", "currency": "EUR", "prices": {"weekly": 1.99, "monthly": 3.00, "yearly": 29.99}},
+    "et": {"name": "Estonia", "region": "EE", "currency": "EUR", "prices": {"weekly": 1.99, "monthly": 3.00, "yearly": 29.99}},
+    "fi": {"name": "Finland", "region": "FI", "currency": "EUR", "prices": {"weekly": 1.99, "monthly": 3.00, "yearly": 29.99}},
+    "fr": {"name": "France", "region": "FR", "currency": "EUR", "prices": {"weekly": 1.99, "monthly": 3.00, "yearly": 29.99}},
+    "fr-lu": {"name": "Luxembourg", "region": "LU", "currency": "EUR", "prices": {"weekly": 1.99, "monthly": 3.00, "yearly": 29.99}},
+    "hr": {"name": "Croatia", "region": "HR", "currency": "EUR", "prices": {"weekly": 1.99, "monthly": 3.00, "yearly": 29.99}},
+    "hu": {"name": "Hungary", "region": "HU", "currency": "HUF", "prices": {"weekly": 999.00, "monthly": 1490.00, "yearly": 9990.00}},
+    "is": {"name": "Iceland", "region": "IS", "currency": "USD", "prices": {"weekly": 1.99, "monthly": 4.00, "yearly": 29.99}},
+    "it": {"name": "Italy", "region": "IT", "currency": "EUR", "prices": {"weekly": 1.99, "monthly": 3.00, "yearly": 29.99}},
+    "lt": {"name": "Lithuania", "region": "LT", "currency": "EUR", "prices": {"weekly": 1.99, "monthly": 3.00, "yearly": 29.99}},
+    "lv": {"name": "Latvia", "region": "LV", "currency": "EUR", "prices": {"weekly": 1.99, "monthly": 3.00, "yearly": 29.99}},
+    "mk": {"name": "North Macedonia", "region": "MK", "currency": "USD", "prices": {"weekly": 1.99, "monthly": 3.00, "yearly": 24.99}},
+    "mt": {"name": "Malta", "region": "MT", "currency": "EUR", "prices": {"weekly": 1.99, "monthly": 3.00, "yearly": 29.99}},
+    "nb": {"name": "Norway", "region": "NO", "currency": "NOK", "prices": {"weekly": 29.00, "monthly": 39.00, "yearly": 299.00}},
+    "nl": {"name": "Netherlands", "region": "NL", "currency": "EUR", "prices": {"weekly": 1.99, "monthly": 3.00, "yearly": 29.99}},
+    "nl-be": {"name": "Belgium", "region": "BE", "currency": "EUR", "prices": {"weekly": 1.99, "monthly": 3.00, "yearly": 29.99}},
+    "pl": {"name": "Poland", "region": "PL", "currency": "PLN", "prices": {"weekly": 9.99, "monthly": 14.99, "yearly": 99.99}},
+    "pt": {"name": "Portugal", "region": "PT", "currency": "EUR", "prices": {"weekly": 1.99, "monthly": 3.00, "yearly": 29.99}},
+    "ro": {"name": "Romania", "region": "RO", "currency": "RON", "prices": {"weekly": 9.99, "monthly": 14.99, "yearly": 129.99}},
+    "ro-md": {"name": "Moldova", "region": "MD", "currency": "USD", "prices": {"weekly": 1.99, "monthly": 4.00, "yearly": 29.99}},
+    "sk": {"name": "Slovakia", "region": "SK", "currency": "EUR", "prices": {"weekly": 1.99, "monthly": 3.00, "yearly": 29.99}},
+    "sl": {"name": "Slovenia", "region": "SI", "currency": "EUR", "prices": {"weekly": 1.99, "monthly": 3.00, "yearly": 29.99}},
+    "sq": {"name": "Albania", "region": "AL", "currency": "USD", "prices": {"weekly": 1.99, "monthly": 4.00, "yearly": 29.99}},
+    "sq-xk": {"name": "Kosovo", "region": "XK", "currency": "EUR", "prices": {"weekly": 1.99, "monthly": 3.00, "yearly": 29.99}},
+    "sr-me": {"name": "Montenegro", "region": "ME", "currency": "EUR", "prices": {"weekly": 0.99, "monthly": 3.00, "yearly": 22.99}},
+    "sr-rs": {"name": "Serbia", "region": "RS", "currency": "EUR", "prices": {"weekly": 1.99, "monthly": 3.00, "yearly": 29.99}},
+    "sv": {"name": "Sweden", "region": "SE", "currency": "SEK", "prices": {"weekly": 29.00, "monthly": 39.00, "yearly": 299.00}},
+    "tr": {"name": "Türkiye", "region": "TR", "currency": "TRY", "prices": {"weekly": 99.99, "monthly": 149.99, "yearly": 1299.99}},
+    "uk": {"name": "Ukraine", "region": "UA", "currency": "USD", "prices": {"weekly": 1.99, "monthly": 4.00, "yearly": 29.99}}
+  }
 }

@@ -56,19 +56,63 @@ const translations = {
   'sr-latn': ['Preskoči na sadržaj', 'Početna', 'Funkcije', 'Podrška', 'Preuzmi aplikaciju', 'Pogledaj u App Storeu', 'Plan za svaku dostavnu rutu.', 'Planiraj rute, drži detalje dostave na jednom mjestu i odaberi period naplate koji ti odgovara.', 'OPCIJE NAPLATE', 'Odaberi plan', 'Svaki plan omogućava pristup NavRoutes funkcijama uz pretplatu. Pretplatom upravljaš putem svog Apple računa.', 'Sedmično', 'Mjesečno', 'Godišnje', '/ sedmica', '/ mjesec', '/ godina', 'NavRoutes je besplatan za preuzimanje. Za plaćene funkcije potrebna je pretplata.', 'Referentne cijene za Ujedinjeno Kraljevstvo važe od 19. oktobra 2026.', 'CIJENE ŠIROM SVIJETA', 'Lokalna cijena u App Storeu', 'Gore navedene cijene su referentne cijene britanskog App Storea. Apple određuje lokalne cijene za svaku prodavnicu, pa cijene u drugim zemljama mogu odstupati od direktne konverzije i uključivati lokalne poreze. Prije pretplate App Store će prikazati tačnu cijenu i valutu za tvoju zemlju ili regiju.', 'Privatnost', 'Uslovi', 'Napravljeno za svakodnevnu dostavnu rutu.']
 };
 
+const localeFromPath = window.location.pathname.split('/').filter(Boolean);
+const pathLanguage = localeFromPath.length > 1 && localeFromPath.at(-1) === 'pricing.html'
+  ? localeFromPath.at(-2)
+  : null;
 const queryLanguage = new URLSearchParams(window.location.search).get('lang');
-const language = (queryLanguage || 'en').toLowerCase();
+const language = (queryLanguage || pathLanguage || 'en').toLowerCase();
 const baseLanguage = language.split('-')[0];
 let copy = translations[language] || translations[baseLanguage] || english;
 if (language === 'sr-rs') copy = translations.sr;
 if (language === 'sr-me') copy = translations['sr-latn'];
+
+const localizedMarketCopy = {
+  en: ['Local App Store prices for {country}, effective 19 October 2026.', 'Prices shown are the local App Store prices scheduled for this market. Apple can change price points; the App Store purchase sheet shows the exact charge before you confirm.'],
+  pl: ['Lokalne ceny App Store dla kraju: {country}, obowiązują od 19 października 2026 r.', 'Powyżej podano lokalne ceny App Store zaplanowane dla tego rynku. Apple może je zmienić; przed potwierdzeniem zakupu App Store pokaże dokładną kwotę.'],
+  de: ['Lokale App-Store-Preise für {country}, gültig ab 19. Oktober 2026.', 'Oben stehen die für diesen Markt geplanten lokalen App-Store-Preise. Apple kann Preise ändern; vor der Bestätigung zeigt der App Store den genauen Betrag.'],
+  fr: ['Prix locaux de l’App Store pour {country}, en vigueur le 19 octobre 2026.', 'Les prix locaux de l’App Store prévus pour ce marché sont indiqués ci-dessus. Apple peut les modifier ; le montant exact s’affiche avant la confirmation.'],
+  it: ['Prezzi locali dell’App Store per {country}, validi dal 19 ottobre 2026.', 'Sopra sono indicati i prezzi locali dell’App Store previsti per questo mercato. Apple può modificarli; l’importo esatto appare prima della conferma.'],
+  hu: ['Helyi App Store-árak erre a piacra: {country}, 2026. október 19-től.', 'A fenti árak erre a piacra tervezett helyi App Store-árak. Az Apple módosíthatja őket; a pontos összeget vásárlás előtt az App Store mutatja.'],
+  cs: ['Místní ceny App Storu pro oblast {country}, platné od 19. října 2026.', 'Výše jsou uvedeny místní ceny App Storu plánované pro tento trh. Apple je může změnit; přesnou částku App Store zobrazí před potvrzením.'],
+  nb: ['Lokale App Store-priser for {country}, gjeldende fra 19. oktober 2026.', 'Prisene over er lokale App Store-priser planlagt for dette markedet. Apple kan endre dem; App Store viser nøyaktig beløp før du bekrefter.'],
+  da: ['Lokale App Store-priser for {country}, gældende fra 19. oktober 2026.', 'Priserne ovenfor er de lokale App Store-priser, der er planlagt for dette marked. Apple kan ændre dem; App Store viser det nøjagtige beløb før bekræftelse.'],
+  es: ['Precios locales de App Store para {country}, vigentes desde el 19 de octubre de 2026.', 'Arriba se muestran los precios locales de App Store previstos para este mercado. Apple puede cambiarlos; App Store indica el importe exacto antes de confirmar.'],
+  nl: ['Lokale App Store-prijzen voor {country}, vanaf 19 oktober 2026.', 'Hierboven staan de lokale App Store-prijzen die voor deze markt zijn gepland. Apple kan prijzen aanpassen; de App Store toont het exacte bedrag voordat je bevestigt.'],
+  pt: ['Preços locais da App Store para {country}, em vigor a partir de 19 de outubro de 2026.', 'Os preços acima são os preços locais da App Store previstos para este mercado. A Apple pode alterá-los; a App Store apresenta o valor exato antes da confirmação.'],
+  lt: ['Vietinės „App Store“ kainos rinkai: {country}, nuo 2026 m. spalio 19 d.', 'Pateiktos šiai rinkai numatytos vietinės „App Store“ kainos. „Apple“ gali jas keisti; prieš patvirtinant pirkimą „App Store“ parodys tikslią sumą.'],
+  sq: ['Çmimet lokale të App Store për {country}, nga 19 tetori 2026.', 'Më sipër janë çmimet lokale të App Store të planifikuara për këtë treg. Apple mund t’i ndryshojë; App Store tregon shumën e saktë para konfirmimit.'],
+  be: ['Мясцовыя цэны App Store для рынку {country}, з 19 кастрычніка 2026 г.', 'Вышэй паказаны мясцовыя цэны App Store, запланаваныя для гэтага рынку. Apple можа іх змяніць; перад пацвярджэннем App Store пакажа дакладную суму.'],
+  bs: ['Lokalne cijene App Storea za tržište {country}, od 19. oktobra 2026.', 'Iznad su lokalne cijene App Storea planirane za ovo tržište. Apple ih može promijeniti; App Store prikazuje tačan iznos prije potvrde.'],
+  bg: ['Местни цени в App Store за {country}, в сила от 19 октомври 2026 г.', 'По-горе са местните цени в App Store, планирани за този пазар. Apple може да ги промени; App Store показва точната сума преди потвърждение.'],
+  hr: ['Lokalne cijene u App Storeu za {country}, od 19. listopada 2026.', 'Iznad su lokalne cijene App Storea planirane za ovo tržište. Apple ih može promijeniti; App Store prikazuje točan iznos prije potvrde.'],
+  el: ['Τοπικές τιμές App Store για την αγορά {country}, από 19 Οκτωβρίου 2026.', 'Οι παραπάνω είναι οι τοπικές τιμές App Store που έχουν προγραμματιστεί για αυτήν την αγορά. Η Apple μπορεί να τις αλλάξει· το App Store εμφανίζει το ακριβές ποσό πριν από την επιβεβαίωση.'],
+  et: ['Kohalikud App Store’i hinnad turule {country} alates 19. oktoobrist 2026.', 'Ülal on selle turu jaoks kavandatud kohalikud App Store’i hinnad. Apple võib neid muuta; App Store näitab enne kinnitamist täpset summat.'],
+  fi: ['Paikalliset App Store -hinnat alueelle {country} 19. lokakuuta 2026 alkaen.', 'Yllä ovat tälle markkinalle suunnitellut paikalliset App Store -hinnat. Apple voi muuttaa niitä; App Store näyttää tarkan veloituksen ennen vahvistusta.'],
+  is: ['Staðbundið App Store-verð fyrir {country}, frá 19. október 2026.', 'Verðin hér að ofan eru staðbundin App Store-verð sem eru áætluð fyrir þennan markað. Apple getur breytt þeim; App Store sýnir nákvæma upphæð áður en þú staðfestir.'],
+  lv: ['Vietējās App Store cenas tirgum {country} no 2026. gada 19. oktobra.', 'Iepriekš norādītas šim tirgum plānotās vietējās App Store cenas. Apple tās var mainīt; pirms apstiprināšanas App Store parādīs precīzu summu.'],
+  mt: ['Prezzijiet lokali tal-App Store għal {country}, mid-19 ta’ Ottubru 2026.', 'Hawn fuq hemm il-prezzijiet lokali tal-App Store ippjanati għal dan is-suq. Apple tista’ tbiddilhom; l-App Store juri l-ammont eżatt qabel tikkonferma.'],
+  ro: ['Prețuri locale în App Store pentru {country}, valabile din 19 octombrie 2026.', 'Mai sus sunt prețurile locale App Store planificate pentru această piață. Apple le poate modifica; App Store afișează suma exactă înainte de confirmare.'],
+  sk: ['Miestne ceny App Store pre trh {country} od 19. októbra 2026.', 'Vyššie sú uvedené miestne ceny App Store plánované pre tento trh. Apple ich môže zmeniť; App Store zobrazí presnú sumu pred potvrdením.'],
+  sl: ['Lokalne cene v App Store za trg {country} od 19. oktobra 2026.', 'Zgoraj so lokalne cene App Store, načrtovane za ta trg. Apple jih lahko spremeni; App Store pred potrditvijo prikaže točen znesek.'],
+  sv: ['Lokala App Store-priser för {country} från 19 oktober 2026.', 'Priserna ovan är de lokala App Store-priser som planerats för den här marknaden. Apple kan ändra dem; App Store visar det exakta beloppet innan du bekräftar.'],
+  tr: ['{country} için yerel App Store fiyatları, 19 Ekim 2026 itibarıyla.', 'Yukarıda bu pazar için planlanan yerel App Store fiyatları yer alıyor. Apple fiyatları değiştirebilir; App Store onaylamadan önce kesin tutarı gösterir.'],
+  uk: ['Місцеві ціни App Store для ринку {country} з 19 жовтня 2026 року.', 'Вище наведено місцеві ціни App Store, заплановані для цього ринку. Apple може їх змінити; перед підтвердженням App Store покаже точну суму.'],
+  mk: ['Локални цени на App Store за пазарот {country}, од 19 октомври 2026 година.', 'Погоре се локалните цени на App Store планирани за овој пазар. Apple може да ги промени; App Store ја прикажува точната сума пред потврда.'],
+  sr: ['Локалне цене App Store-а за тржиште {country}, од 19. октобра 2026.', 'Изнад су локалне цене App Store-а планиране за ово тржиште. Apple може да их промени; App Store приказује тачан износ пре потврде.'],
+  'sr-latn': ['Lokalne App Store cijene za tržište {country}, od 19. oktobra 2026.', 'Iznad su lokalne App Store cijene planirane za ovo tržište. Apple ih može promijeniti; App Store prikazuje tačan iznos prije potvrde.']
+};
+const localizedCopyKey = language === 'sr-me' ? 'sr-latn' : language === 'sr-rs' ? 'sr' : baseLanguage;
+copy = [...copy];
+copy[18] = (localizedMarketCopy[language] || localizedMarketCopy[localizedCopyKey] || localizedMarketCopy.en)[0];
+copy[21] = (localizedMarketCopy[language] || localizedMarketCopy[localizedCopyKey] || localizedMarketCopy.en)[1];
 
 document.documentElement.lang = language;
 document.title = `${copy[keys.indexOf('title')]} | NavRoutes`;
 document.querySelector('meta[name="description"]')?.setAttribute('content', copy[keys.indexOf('intro')]);
 document.querySelector('link[rel="canonical"]')?.setAttribute(
   'href',
-  `https://navroutes.com/pricing.html?lang=${encodeURIComponent(language)}`
+  `https://navroutes.com${language === 'en' ? '' : `/${encodeURIComponent(language)}`}/pricing.html`
 );
 
 document.querySelectorAll('[data-i18n]').forEach(element => {
@@ -87,26 +131,26 @@ fetch('/pricing-data.json')
     return response.json();
   })
   .then(data => {
-    if (!Array.isArray(data.plans) || data.currency !== 'GBP') {
-      throw new Error('Pricing data is missing its GBP plan list');
+    const market = data.markets?.[language] || data.markets?.[baseLanguage];
+    if (!market || !market.prices || !market.currency || !market.region) {
+      throw new Error(`Pricing data is missing the ${language} storefront`);
     }
     const formatter = new Intl.NumberFormat(language, {
       style: 'currency',
-      currency: data.currency,
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
+      currency: market.currency
     });
-    data.plans.forEach(plan => {
-      if (!Number.isFinite(plan.amount) || typeof plan.id !== 'string') {
-        throw new Error('Pricing data contains an invalid plan');
-      }
-      const price = document.querySelector(`[data-price="${plan.id}"]`);
-      if (!price) throw new Error(`Missing price element for ${plan.id}`);
-      price.textContent = formatter.format(plan.amount);
+    Object.entries(market.prices).forEach(([plan, amount]) => {
+      if (!Number.isFinite(amount)) throw new Error(`Pricing data contains an invalid ${plan} price`);
+      const price = document.querySelector(`[data-price="${plan}"]`);
+      if (!price) throw new Error(`Missing price element for ${plan}`);
+      price.textContent = formatter.format(amount);
     });
+    const countryName = new Intl.DisplayNames([language], { type: 'region' }).of(market.region) || market.name;
+    const effective = document.querySelector('[data-i18n="effective"]');
+    if (effective) effective.textContent = copy[18].replace('{country}', countryName);
   })
   .catch(error => {
-    console.error('Unable to load NavRoutes reference prices.', error);
+    console.error('Unable to load NavRoutes local prices.', error);
     const notice = document.createElement('p');
     notice.className = 'pricing-data-error';
     notice.setAttribute('role', 'alert');
