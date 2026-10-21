@@ -66,7 +66,12 @@ const supportedLanguage = preferredLanguages
   .map(getLanguageCode)
   .find(language => language !== null);
 const currentPath = window.location.pathname.replace(/\/+$/, '') || '/';
-const isLocalizedPage = languages.some(language => currentPath === `/${language.code}`);
+const currentPathParts = currentPath.split('/').filter(Boolean);
+const currentRouteLanguage = languages.find(language => language.code === currentPathParts[0]);
+const isLocalizedPage = Boolean(currentRouteLanguage && currentPathParts.length === 1);
+const localizedPageSuffix = currentRouteLanguage && currentPathParts.length > 1
+  ? `/${currentPathParts.slice(1).join('/')}`
+  : '';
 const selectorLabels = {
   en: 'Language', pl: 'Język', de: 'Sprache', fr: 'Langue', it: 'Lingua',
   hu: 'Nyelv', cs: 'Jazyk', nb: 'Språk', da: 'Sprog', es: 'Idioma',
@@ -102,12 +107,17 @@ document.querySelectorAll('.language-switcher').forEach(switcher => {
     option.textContent = language.label;
     select.append(option);
   });
-  const selectedLanguage = languages.find(language => currentPath === language.path.replace(/\/+$/, '') || currentPath === language.path);
+  const selectedLanguage = currentRouteLanguage ||
+    languages.find(language => currentPath === language.path.replace(/\/+$/, '') || currentPath === language.path);
   select.value = selectedLanguage?.code || 'en';
   select.addEventListener('change', () => {
     const language = languages.find(item => item.code === select.value);
     localStorage.setItem('navroutes-language', language.code);
-    window.location.assign(`${language.path}${window.location.search}${window.location.hash}`);
+    const basePath = language.path.replace(/\/+$/, '');
+    const destination = localizedPageSuffix
+      ? `${basePath}${localizedPageSuffix}`
+      : (language.path || '/');
+    window.location.assign(`${destination}${window.location.search}${window.location.hash}`);
   });
   switcher.replaceChildren(select);
 });

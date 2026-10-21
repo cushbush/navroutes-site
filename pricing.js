@@ -204,6 +204,12 @@ const homePath = language === 'en' ? '/' : `/${language}/`;
 document.querySelectorAll('[data-home]').forEach(link => {
   link.setAttribute('href', homePath);
 });
+document.querySelectorAll('[data-i18n="features"]').forEach(link => {
+  link.setAttribute('href', language === 'en' ? '/marketing.html' : `/${language}/marketing.html`);
+});
+document.querySelectorAll('[data-i18n="support"]').forEach(link => {
+  link.setAttribute('href', language === 'en' ? '/support.html' : `/${language}/support.html`);
+});
 
 fetch('/pricing-data.json')
   .then(response => {
