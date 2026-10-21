@@ -103,6 +103,41 @@ const localizedMarketCopy = {
   'sr-latn': ['Lokalne App Store cijene za tržište {country}, od 19. oktobra 2026.', 'Iznad su lokalne App Store cijene planirane za ovo tržište. Apple ih može promijeniti; App Store prikazuje tačan iznos prije potvrde.']
 };
 const localizedCopyKey = language === 'sr-me' ? 'sr-latn' : language === 'sr-rs' ? 'sr' : baseLanguage;
+const pricingEyebrows = {
+  en: 'NAVROUTES FOR IPHONE · SUBSCRIPTIONS',
+  pl: 'NAVROUTES NA IPHONE · SUBSKRYPCJE',
+  de: 'NAVROUTES FÜR IPHONE · ABOS',
+  fr: 'NAVROUTES SUR IPHONE · ABONNEMENTS',
+  it: 'NAVROUTES PER IPHONE · ABBONAMENTI',
+  hu: 'NAVROUTES IPHONE-RA · ELŐFIZETÉSEK',
+  cs: 'NAVROUTES PRO IPHONE · PŘEDPLATNÉ',
+  nb: 'NAVROUTES FOR IPHONE · ABONNEMENTER',
+  da: 'NAVROUTES TIL IPHONE · ABONNEMENTER',
+  es: 'NAVROUTES PARA IPHONE · SUSCRIPCIONES',
+  nl: 'NAVROUTES VOOR IPHONE · ABONNEMENTEN',
+  pt: 'NAVROUTES PARA IPHONE · ASSINATURAS',
+  lt: 'NAVROUTES IPHONE · PRENUMERATOS',
+  sq: 'NAVROUTES PËR IPHONE · ABONIMET',
+  be: 'NAVROUTES ДЛЯ IPHONE · ПАДПІСКІ',
+  bs: 'NAVROUTES ZA IPHONE · PRETPLATE',
+  bg: 'NAVROUTES ЗА IPHONE · АБОНАМЕНТИ',
+  hr: 'NAVROUTES ZA IPHONE · PRETPLATE',
+  el: 'NAVROUTES ΓΙΑ IPHONE · ΣΥΝΔΡΟΜΕΣ',
+  et: "NAVROUTES IPHONE'ILE · TELLIMUSED",
+  fi: 'NAVROUTES IPHONELLE · TILAUKSET',
+  is: 'NAVROUTES FYRIR IPHONE · ÁSKRIFTIR',
+  lv: 'NAVROUTES IPHONE · ABONEMENTI',
+  mt: 'NAVROUTES GĦAL IPHONE · ABBONAMENTI',
+  ro: 'NAVROUTES PENTRU IPHONE · ABONAMENTE',
+  sk: 'NAVROUTES PRE IPHONE · PREDPLATNÉ',
+  sl: 'NAVROUTES ZA IPHONE · NAROČNINE',
+  sv: 'NAVROUTES FÖR IPHONE · ABONNEMANG',
+  tr: 'IPHONE İÇİN NAVROUTES · ABONELİKLER',
+  uk: 'NAVROUTES ДЛЯ IPHONE · ПІДПИСКИ',
+  mk: 'NAVROUTES ЗА IPHONE · ПРЕТПЛАТИ',
+  sr: 'NAVROUTES ЗА IPHONE · ПРЕТПЛАТЕ',
+  'sr-latn': 'NAVROUTES ZA IPHONE · PRETPLATE'
+};
 const currentPriceCopy = {
   en: ['Current App Store prices for {country}, checked 21 October 2026.', 'The prices above match the current App Store prices for this market. Apple may change price points; the App Store shows the exact amount before you confirm.'],
   pl: ['Aktualne ceny w App Store dla kraju {country}, sprawdzone 21 października 2026 r.', 'Powyższe ceny odpowiadają aktualnym cenom w App Store na tym rynku. Apple może zmienić progi cenowe; dokładną kwotę zobaczysz przed potwierdzeniem zakupu.'],
@@ -147,6 +182,10 @@ const selectedPriceCopy = currentPriceCopy[language] ||
 copy = [...copy];
 copy[18] = selectedPriceCopy[0];
 copy[21] = selectedPriceCopy[1];
+const pricingEyebrow = document.querySelector('[data-i18n="eyebrow"]');
+if (pricingEyebrow) {
+  pricingEyebrow.textContent = pricingEyebrows[localizedCopyKey] || pricingEyebrows[baseLanguage] || pricingEyebrows.en;
+}
 
 document.documentElement.lang = language;
 document.title = `${copy[keys.indexOf('title')]} | NavRoutes`;
