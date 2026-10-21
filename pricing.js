@@ -103,9 +103,50 @@ const localizedMarketCopy = {
   'sr-latn': ['Lokalne App Store cijene za tržište {country}, od 19. oktobra 2026.', 'Iznad su lokalne App Store cijene planirane za ovo tržište. Apple ih može promijeniti; App Store prikazuje tačan iznos prije potvrde.']
 };
 const localizedCopyKey = language === 'sr-me' ? 'sr-latn' : language === 'sr-rs' ? 'sr' : baseLanguage;
+const currentPriceCopy = {
+  en: ['Current App Store prices for {country}, checked 21 October 2026.', 'The prices above match the current App Store prices for this market. Apple may change price points; the App Store shows the exact amount before you confirm.'],
+  pl: ['Aktualne ceny w App Store dla kraju {country}, sprawdzone 21 października 2026 r.', 'Powyższe ceny odpowiadają aktualnym cenom w App Store na tym rynku. Apple może zmienić progi cenowe; dokładną kwotę zobaczysz przed potwierdzeniem zakupu.'],
+  de: ['Aktuelle App-Store-Preise für {country}, geprüft am 21. Oktober 2026.', 'Die Preise oben entsprechen den aktuellen App-Store-Preisen für diesen Markt. Apple kann Preisstufen ändern; vor dem Kauf wird der genaue Betrag angezeigt.'],
+  fr: ['Prix actuels de l’App Store pour {country}, vérifiés le 21 octobre 2026.', 'Les prix ci-dessus correspondent aux prix actuels de l’App Store pour ce marché. Apple peut modifier les paliers tarifaires ; le montant exact s’affiche avant confirmation.'],
+  it: ['Prezzi attuali dell’App Store per {country}, verificati il 21 ottobre 2026.', 'I prezzi sopra corrispondono ai prezzi attuali dell’App Store per questo mercato. Apple può modificare i prezzi; l’importo esatto appare prima della conferma.'],
+  hu: ['Aktuális App Store-árak erre a piacra: {country}, ellenőrizve: 2026. október 21.', 'A fenti árak az App Store jelenlegi árai ezen a piacon. Az Apple módosíthatja az árakat; a pontos összeget megerősítés előtt látod.'],
+  cs: ['Aktuální ceny v App Storu pro oblast {country}, ověřeno 21. října 2026.', 'Výše uvedené ceny odpovídají aktuálním cenám v App Storu pro tento trh. Apple může ceny změnit; přesnou částku uvidíte před potvrzením.'],
+  nb: ['Gjeldende App Store-priser for {country}, kontrollert 21. oktober 2026.', 'Prisene ovenfor samsvarer med gjeldende App Store-priser for dette markedet. Apple kan endre prisene; App Store viser nøyaktig beløp før du bekrefter.'],
+  da: ['Aktuelle App Store-priser for {country}, kontrolleret 21. oktober 2026.', 'Priserne ovenfor svarer til de aktuelle App Store-priser for dette marked. Apple kan ændre priserne; App Store viser det nøjagtige beløb før bekræftelse.'],
+  es: ['Precios actuales de App Store para {country}, comprobados el 21 de octubre de 2026.', 'Los precios anteriores coinciden con los precios actuales de App Store para este mercado. Apple puede cambiarlos; App Store muestra el importe exacto antes de confirmar.'],
+  nl: ['Actuele App Store-prijzen voor {country}, gecontroleerd op 21 oktober 2026.', 'De prijzen hierboven komen overeen met de actuele App Store-prijzen voor deze markt. Apple kan prijzen wijzigen; de App Store toont het exacte bedrag voordat je bevestigt.'],
+  pt: ['Preços atuais da App Store para {country}, verificados em 21 de outubro de 2026.', 'Os preços acima correspondem aos preços atuais da App Store para este mercado. A Apple pode alterá-los; a App Store mostra o valor exato antes da confirmação.'],
+  lt: ['Dabartinės „App Store“ kainos rinkai {country}, patikrinta 2026 m. spalio 21 d.', 'Pateiktos dabartinės šios rinkos „App Store“ kainos. „Apple“ gali jas keisti; tiksli suma rodoma prieš patvirtinant pirkimą.'],
+  sq: ['Çmimet aktuale të App Store për {country}, kontrolluar më 21 tetor 2026.', 'Çmimet më sipër përputhen me çmimet aktuale të App Store për këtë treg. Apple mund t’i ndryshojë; App Store shfaq shumën e saktë para konfirmimit.'],
+  be: ['Актуальныя цэны App Store для рынку {country}, праверана 21 кастрычніка 2026 г.', 'Вышэй паказаны актуальныя цэны App Store для гэтага рынку. Apple можа іх змяніць; перад пацвярджэннем App Store пакажа дакладную суму.'],
+  bs: ['Trenutne cijene App Storea za tržište {country}, provjereno 21. oktobra 2026.', 'Gore navedene cijene odgovaraju trenutnim cijenama App Storea za ovo tržište. Apple ih može promijeniti; App Store prikazuje tačan iznos prije potvrde.'],
+  bg: ['Актуални цени в App Store за {country}, проверени на 21 октомври 2026 г.', 'Цените по-горе съответстват на актуалните цени в App Store за този пазар. Apple може да ги промени; App Store показва точната сума преди потвърждение.'],
+  hr: ['Trenutačne cijene u App Storeu za {country}, provjereno 21. listopada 2026.', 'Gore navedene cijene odgovaraju trenutačnim cijenama u App Storeu za ovo tržište. Apple ih može promijeniti; App Store prikazuje točan iznos prije potvrde.'],
+  el: ['Τρέχουσες τιμές App Store για την αγορά {country}, ελέγχθηκαν στις 21 Οκτωβρίου 2026.', 'Οι παραπάνω τιμές αντιστοιχούν στις τρέχουσες τιμές App Store για αυτήν την αγορά. Η Apple μπορεί να τις αλλάξει· το App Store εμφανίζει το ακριβές ποσό πριν από την επιβεβαίωση.'],
+  et: ['Kehtivad App Store’i hinnad turule {country}, kontrollitud 21. oktoobril 2026.', 'Ülaltoodud hinnad vastavad selle turu kehtivatele App Store’i hindadele. Apple võib hindu muuta; App Store näitab enne kinnitamist täpset summat.'],
+  fi: ['Nykyiset App Store -hinnat alueelle {country}, tarkistettu 21. lokakuuta 2026.', 'Yllä olevat hinnat vastaavat tämän alueen nykyisiä App Store -hintoja. Apple voi muuttaa hintoja; App Store näyttää tarkan summan ennen vahvistusta.'],
+  is: ['Núverandi App Store-verð fyrir {country}, yfirfarið 21. október 2026.', 'Verðin hér að ofan samsvara núverandi App Store-verði á þessu svæði. Apple getur breytt verðinu; App Store sýnir nákvæma upphæð áður en þú staðfestir.'],
+  lv: ['Pašreizējās App Store cenas tirgum {country}, pārbaudītas 2026. gada 21. oktobrī.', 'Iepriekš norādītas šī tirgus pašreizējās App Store cenas. Apple tās var mainīt; pirms apstiprināšanas App Store parādīs precīzu summu.'],
+  mt: ['Prezzijiet attwali tal-App Store għal {country}, iċċekkjati fil-21 ta’ Ottubru 2026.', 'Il-prezzijiet ta’ hawn fuq jaqblu mal-prezzijiet attwali tal-App Store għal dan is-suq. Apple tista’ tbiddilhom; l-App Store juri l-ammont eżatt qabel tikkonferma.'],
+  ro: ['Prețuri actuale în App Store pentru {country}, verificate la 21 octombrie 2026.', 'Prețurile de mai sus corespund prețurilor actuale din App Store pentru această piață. Apple le poate modifica; App Store afișează suma exactă înainte de confirmare.'],
+  sk: ['Aktuálne ceny App Store pre trh {country}, overené 21. októbra 2026.', 'Vyššie uvedené ceny zodpovedajú aktuálnym cenám App Store pre tento trh. Apple ich môže zmeniť; App Store zobrazí presnú sumu pred potvrdením.'],
+  sl: ['Trenutne cene v App Store za trg {country}, preverjeno 21. oktobra 2026.', 'Zgoraj navedene cene ustrezajo trenutnim cenam v App Store za ta trg. Apple jih lahko spremeni; App Store pred potrditvijo prikaže točen znesek.'],
+  sv: ['Aktuella App Store-priser för {country}, kontrollerade 21 oktober 2026.', 'Priserna ovan motsvarar de aktuella App Store-priserna för den här marknaden. Apple kan ändra priserna; App Store visar det exakta beloppet innan du bekräftar.'],
+  tr: ['{country} için güncel App Store fiyatları, 21 Ekim 2026 tarihinde kontrol edildi.', 'Yukarıdaki fiyatlar bu pazar için geçerli App Store fiyatlarıdır. Apple fiyatları değiştirebilir; App Store onaylamadan önce kesin tutarı gösterir.'],
+  uk: ['Поточні ціни App Store для ринку {country}, перевірено 21 жовтня 2026 року.', 'Вище наведено поточні ціни App Store для цього ринку. Apple може їх змінити; перед підтвердженням App Store покаже точну суму.'],
+  mk: ['Тековни цени на App Store за пазарот {country}, проверени на 21 октомври 2026 година.', 'Погоре се тековните цени на App Store за овој пазар. Apple може да ги промени; App Store ја прикажува точната сума пред потврда.'],
+  sr: ['Тренутне цене App Store-а за тржиште {country}, проверено 21. октобра 2026.', 'Изнад су наведене тренутне цене App Store-а за ово тржиште. Apple може да их промени; App Store приказује тачан износ пре потврде.'],
+  'sr-latn': ['Trenutne cijene App Storea za tržište {country}, provjereno 21. oktobra 2026.', 'Iznad su navedene trenutne cijene App Storea za ovo tržište. Apple ih može promijeniti; App Store prikazuje tačan iznos prije potvrde.']
+};
+const selectedPriceCopy = currentPriceCopy[language] ||
+  currentPriceCopy[localizedCopyKey] ||
+  currentPriceCopy[baseLanguage] ||
+  localizedMarketCopy[language] ||
+  localizedMarketCopy[localizedCopyKey] ||
+  localizedMarketCopy.en;
 copy = [...copy];
-copy[18] = (localizedMarketCopy[language] || localizedMarketCopy[localizedCopyKey] || localizedMarketCopy.en)[0];
-copy[21] = (localizedMarketCopy[language] || localizedMarketCopy[localizedCopyKey] || localizedMarketCopy.en)[1];
+copy[18] = selectedPriceCopy[0];
+copy[21] = selectedPriceCopy[1];
 
 document.documentElement.lang = language;
 document.title = `${copy[keys.indexOf('title')]} | NavRoutes`;
@@ -154,6 +195,6 @@ fetch('/pricing-data.json')
     const notice = document.createElement('p');
     notice.className = 'pricing-data-error';
     notice.setAttribute('role', 'alert');
-    notice.textContent = 'Reference prices could not be loaded. Check the App Store for the current price in your region.';
+    notice.textContent = 'Saved App Store prices could not be loaded. Check the App Store for the latest price in your region.';
     document.querySelector('.pricing-plans')?.prepend(notice);
   });
