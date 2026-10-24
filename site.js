@@ -42,10 +42,6 @@ const languages = [
   { code: 'uk', label: 'Українська', path: '/uk/' }
 ];
 const languageCodes = new Set(languages.map(language => language.code));
-const languagePreference = localStorage.getItem('navroutes-language');
-const preferredLanguages = languagePreference
-  ? [languagePreference]
-  : (navigator.languages.length ? navigator.languages : [navigator.language]);
 const getLanguageCode = language => {
   const normalized = language.toLowerCase().replace('_', '-');
   if (languageCodes.has(normalized)) return normalized;
@@ -62,9 +58,6 @@ const getLanguageCode = language => {
   if (base === 'no') return 'nb';
   return languageCodes.has(base) ? base : null;
 };
-const supportedLanguage = preferredLanguages
-  .map(getLanguageCode)
-  .find(language => language !== null);
 const currentPath = window.location.pathname.replace(/\/+$/, '') || '/';
 const currentPathParts = currentPath.split('/').filter(Boolean);
 const currentRouteLanguage = languages.find(language => language.code === currentPathParts[0]);
@@ -137,11 +130,6 @@ browserLanguageValue.textContent = browserLanguageName
   || browserLanguage;
 browserLanguageIndicator.append(browserLanguageLabel, browserLanguageValue);
 document.querySelector('.site-header')?.before(browserLanguageIndicator);
-
-if (!isLocalizedPage && (currentPath === '/' || currentPath === '/index.html') && supportedLanguage && supportedLanguage !== 'en') {
-  const language = languages.find(item => item.code === supportedLanguage);
-  window.location.replace(`${language.path}${window.location.search}${window.location.hash}`);
-}
 
 const states = {
   parcel: {
