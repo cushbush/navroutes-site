@@ -105,7 +105,6 @@ document.querySelectorAll('.language-switcher').forEach(switcher => {
   select.value = selectedLanguage?.code || 'en';
   select.addEventListener('change', () => {
     const language = languages.find(item => item.code === select.value);
-    localStorage.setItem('navroutes-language', language.code);
     const basePath = language.path.replace(/\/+$/, '');
     const destination = localizedPageSuffix
       ? `${basePath}${localizedPageSuffix}`
@@ -117,9 +116,18 @@ document.querySelectorAll('.language-switcher').forEach(switcher => {
 
 const browserLanguage = navigator.languages[0] || navigator.language;
 const browserLanguageCode = getLanguageCode(browserLanguage);
+const browserLanguageBase = browserLanguageCode?.split('-')[0];
 const browserLanguageName = typeof Intl.DisplayNames === 'function'
-  ? new Intl.DisplayNames([document.documentElement.lang], { type: 'language' }).of(browserLanguage)
+  ? new Intl.DisplayNames([pageLanguage], { type: 'language' }).of(browserLanguageBase || browserLanguage)
   : null;
+const languageSuggestionDismissalKey = 'navroutes-dismissed-language-suggestion';
+const browserLanguagePreference = browserLanguage.toLowerCase().replace('_', '-');
+let dismissedLanguageSuggestion = null;
+try {
+  dismissedLanguageSuggestion = localStorage.getItem(languageSuggestionDismissalKey);
+} catch (error) {
+  console.error('Unable to read NavRoutes language suggestion preference.', error);
+}
 const browserLanguageIndicator = document.createElement('p');
 browserLanguageIndicator.className = 'browser-language-indicator wrap';
 const browserLanguageLabel = document.createElement('span');
@@ -129,6 +137,32 @@ browserLanguageValue.textContent = browserLanguageName
   || languages.find(language => language.code === browserLanguageCode)?.label
   || browserLanguage;
 browserLanguageIndicator.append(browserLanguageLabel, browserLanguageValue);
+const suggestedLanguage = languages.find(language => language.code === browserLanguageCode);
+const isEnglishHomepage = (currentPath === '/' || currentPath === '/index.html') && pageLanguage === 'en';
+if (isEnglishHomepage && suggestedLanguage && browserLanguageBase !== 'en' &&
+    dismissedLanguageSuggestion !== browserLanguagePreference) {
+  const suggestion = document.createElement('span');
+  suggestion.className = 'browser-language-suggestion';
+  const dismissSuggestion = () => {
+    try {
+      localStorage.setItem(languageSuggestionDismissalKey, browserLanguagePreference);
+    } catch (error) {
+      console.error('Unable to save NavRoutes language suggestion preference.', error);
+    }
+    suggestion.remove();
+  };
+  const languageLink = document.createElement('a');
+  languageLink.href = `${suggestedLanguage.path}${window.location.search}${window.location.hash}`;
+  languageLink.textContent = `View in ${browserLanguageName || suggestedLanguage.label}`;
+  languageLink.addEventListener('click', dismissSuggestion);
+  suggestion.append(languageLink);
+  const stayButton = document.createElement('button');
+  stayButton.type = 'button';
+  stayButton.textContent = 'Keep English';
+  stayButton.addEventListener('click', dismissSuggestion);
+  suggestion.append(stayButton);
+  browserLanguageIndicator.append(suggestion);
+}
 document.querySelector('.site-header')?.before(browserLanguageIndicator);
 
 const states = {
